@@ -1,0 +1,582 @@
+/* =========================================================
+   CSS Custom Properties
+   ========================================================= */
+:root {
+  /* Colors */
+  --color-primary:        #4f46e5;
+  --color-primary-hover:  #4338ca;
+  --color-accent-food:    #16a34a;
+  --color-accent-transport: #d97706;
+  --color-accent-fun:     #db2777;
+  --color-bg:             #f9fafb;
+  --color-surface:        #ffffff;
+  --color-border:         #e5e7eb;
+  --color-text:           #111827;
+  --color-text-muted:     #6b7280;
+  --color-error:          #dc2626;
+  --color-warning-bg:     #fef3c7;
+  --color-warning-text:   #92400e;
+  --color-error-bg:       #fee2e2;
+  --color-error-text:     #991b1b;
+  --color-info-bg:        #dbeafe;
+  --color-info-text:      #1e40af;
+
+  /* Spacing */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  48px;
+
+  /* Font Sizes */
+  --font-size-sm:   14px;
+  --font-size-base: 16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   22px;
+  --font-size-2xl:  28px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Touch Targets */
+  --min-touch: 44px;
+
+  /* Chart */
+  --chart-max-height: 200px;
+  --bar-height: 0%;
+}
+
+/* =========================================================
+   Base Reset
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* =========================================================
+   Typography
+   ========================================================= */
+h1 { font-size: var(--font-size-2xl); font-weight: 700; }
+h2 { font-size: var(--font-size-xl);  font-weight: 600; }
+
+/* =========================================================
+   Interactive Elements — min 44×44 touch target, min 14px text
+   ========================================================= */
+button,
+input,
+select,
+textarea {
+  font-size: var(--font-size-sm);
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  font-family: inherit;
+}
+
+/* =========================================================
+   Notification Banner
+   ========================================================= */
+.notification-banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.3s ease;
+}
+
+.notification-banner--hidden {
+  display: none;
+}
+
+.notification-banner--info {
+  background-color: var(--color-info-bg);
+  color: var(--color-info-text);
+  border-color: #93c5fd;
+}
+
+.notification-banner--warning {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border-color: #fcd34d;
+}
+
+.notification-banner--error {
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+  border-color: #fca5a5;
+}
+
+.notification-banner__message {
+  flex: 1;
+}
+
+.notification-banner__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  padding: 0 var(--space-xs);
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: inherit;
+  opacity: 0.75;
+}
+
+.notification-banner__close:hover,
+.notification-banner__close:focus-visible {
+  opacity: 1;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   App Header
+   ========================================================= */
+.app-header {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.app-header__title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+/* =========================================================
+   Main Layout
+   ========================================================= */
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Two-column wrapper: default single-column (mobile-first) */
+.content-columns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* =========================================================
+   Balance Section
+   ========================================================= */
+.balance-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.balance-section__heading {
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.balance-section__amount {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* =========================================================
+   Form Section
+   ========================================================= */
+.form-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.form-section__heading {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-md);
+}
+
+.expense-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Form Field */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-field__label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-field__input,
+.form-field__select {
+  width: 100%;
+  padding: 0 var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  /* min-height already set globally, but explicit here for clarity */
+  min-height: var(--min-touch);
+}
+
+.form-field__input:focus,
+.form-field__select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.form-field__input[aria-invalid="true"],
+.form-field__select[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+/* Field Error */
+.field-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  min-height: 1.25em; /* reserves space so layout doesn't jump */
+}
+
+.field-error:empty {
+  display: none;
+}
+
+/* Submit Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding: 0 var(--space-lg);
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  width: 100%;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn--primary:active {
+  transform: scale(0.98);
+}
+
+.btn--primary:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Chart Section
+   ========================================================= */
+.chart-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.chart-section__heading {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-md);
+}
+
+.chart {
+  width: 100%;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: var(--space-md);
+  height: var(--chart-max-height);
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+  flex: 1;
+  /* full height of .chart-bars so child --bar-height % resolves correctly */
+  height: 100%;
+  min-width: 0;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 80px;
+  /* --bar-height is set inline as a percentage (0%–100%); resolves against
+     the .chart-bar-group height which equals .chart-bars height (200px) */
+  height: var(--bar-height, 0%);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: height 0.3s ease;
+  min-height: 0;
+}
+
+.chart-bar--food      { background-color: var(--color-accent-food); }
+.chart-bar--transport { background-color: var(--color-accent-transport); }
+.chart-bar--fun       { background-color: var(--color-accent-fun); }
+
+.chart-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.chart-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Transaction History Section
+   ========================================================= */
+.history-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.history-section__heading {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-md);
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.transaction-list__empty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+/* Individual transaction entry (rendered by historyList.render) */
+.transaction-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.transaction-entry__name {
+  font-weight: 600;
+  flex: 1 1 120px;
+  word-break: break-word;
+}
+
+.transaction-entry__amount {
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.transaction-entry__date {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Category badge */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-sm);
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-height: auto;
+  min-width: auto;
+}
+
+.category-badge--food {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.category-badge--transport {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+.category-badge--fun {
+  background-color: #fce7f3;
+  color: #be185d;
+}
+
+/* Delete button within transaction entry (future task) */
+.transaction-entry__delete {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  padding: 0 var(--space-sm);
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  color: var(--color-error);
+  transition: background-color 0.2s ease;
+}
+
+.transaction-entry__delete:hover {
+  background-color: var(--color-error-bg);
+}
+
+.transaction-entry__delete:focus-visible {
+  outline: 2px solid var(--color-error);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Responsive Breakpoint — ≥ 600px: Two-column layout
+   ========================================================= */
+@media (min-width: 600px) {
+  .app-header__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  /* Form + chart side by side */
+  .content-columns {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .form-section,
+  .chart-section {
+    flex: 1 1 0;
+    min-width: 0; /* prevent flex overflow */
+  }
+
+  /* History spans full width below the two-column row */
+  .history-section {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   Responsive Breakpoint — ≥ 900px: Wider padding/spacing
+   ========================================================= */
+@media (min-width: 900px) {
+  .app-main {
+    padding: var(--space-xl) var(--space-xl);
+  }
+
+  .app-header {
+    padding: var(--space-lg) var(--space-xl);
+  }
+}
+
+/* =========================================================
+   Focus Styles — global accessible focus ring
+   ========================================================= */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Screen Reader Only Utility
+   ========================================================= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

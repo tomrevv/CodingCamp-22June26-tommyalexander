@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Notification Banner (initially hidden) -->
+  <div
+    id="notification-banner"
+    class="notification-banner notification-banner--hidden"
+    role="alert"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <span id="notification-message" class="notification-banner__message"></span>
+    <button
+      id="notification-close"
+      class="notification-banner__close"
+      type="button"
+      aria-label="Close notification"
+    >×</button>
+  </div>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <h1 class="app-header__title">Expense &amp; Budget Visualizer</h1>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Balance Display Section -->
+    <section class="balance-section" aria-labelledby="balance-heading">
+      <h2 id="balance-heading" class="balance-section__heading">Total Spent</h2>
+      <p class="balance-section__amount">
+        $<span id="balance-display">0.00</span>
+      </p>
+    </section>
+
+    <!-- Two-column wrapper (form + chart) -->
+    <div class="content-columns">
+
+      <!-- Input Form Section -->
+      <section class="form-section" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="form-section__heading">Add Expense</h2>
+
+        <form id="expense-form" class="expense-form" novalidate>
+
+          <!-- Item Name Field -->
+          <div class="form-field">
+            <label for="item-name" class="form-field__label">Item Name</label>
+            <input
+              type="text"
+              id="item-name"
+              name="itemName"
+              class="form-field__input"
+              maxlength="100"
+              autocomplete="off"
+              placeholder="e.g. Lunch"
+              aria-describedby="item-name-error"
+              required
+            />
+            <span id="item-name-error" class="field-error" aria-live="polite"></span>
+          </div>
+
+          <!-- Amount Field -->
+          <div class="form-field">
+            <label for="amount" class="form-field__label">Amount ($)</label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              class="form-field__input"
+              min="0.01"
+              max="9999999.99"
+              step="0.01"
+              placeholder="e.g. 12.50"
+              aria-describedby="amount-error"
+              required
+            />
+            <span id="amount-error" class="field-error" aria-live="polite"></span>
+          </div>
+
+          <!-- Category Field -->
+          <div class="form-field">
+            <label for="category" class="form-field__label">Category</label>
+            <select
+              id="category"
+              name="category"
+              class="form-field__select"
+              aria-describedby="category-error"
+              required
+            >
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Fun">Fun</option>
+            </select>
+            <span id="category-error" class="field-error" aria-live="polite"></span>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="submit-btn" class="btn btn--primary">
+            Add Expense
+          </button>
+
+        </form>
+      </section>
+
+      <!-- Category Chart Section -->
+      <section class="chart-section" aria-labelledby="chart-heading">
+        <h2 id="chart-heading" class="chart-section__heading">Spending by Category</h2>
+
+        <div
+          id="category-chart"
+          class="chart"
+          role="img"
+          aria-label="Spending by category: Food $0.00, Transport $0.00, Fun $0.00"
+        >
+          <div class="chart-bars">
+
+            <!-- Food Bar -->
+            <div class="chart-bar-group">
+              <div
+                class="chart-bar chart-bar--food"
+                style="--bar-height: 0%"
+                aria-hidden="true"
+              ></div>
+              <span class="chart-label">Food</span>
+              <span class="chart-value" id="chart-value-food">$0.00</span>
+            </div>
+
+            <!-- Transport Bar -->
+            <div class="chart-bar-group">
+              <div
+                class="chart-bar chart-bar--transport"
+                style="--bar-height: 0%"
+                aria-hidden="true"
+              ></div>
+              <span class="chart-label">Transport</span>
+              <span class="chart-value" id="chart-value-transport">$0.00</span>
+            </div>
+
+            <!-- Fun Bar -->
+            <div class="chart-bar-group">
+              <div
+                class="chart-bar chart-bar--fun"
+                style="--bar-height: 0%"
+                aria-hidden="true"
+              ></div>
+              <span class="chart-label">Fun</span>
+              <span class="chart-value" id="chart-value-fun">$0.00</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.content-columns -->
+
+    <!-- Transaction History Section -->
+    <section class="history-section" aria-labelledby="history-heading">
+      <h2 id="history-heading" class="history-section__heading">Transaction History</h2>
+      <ul
+        id="transaction-list"
+        class="transaction-list"
+        aria-label="Transaction history"
+      >
+        <!-- Populated by historyList.render() -->
+        <li class="transaction-list__empty" id="history-empty-state">
+          No transactions recorded yet.
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
